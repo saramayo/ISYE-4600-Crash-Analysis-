@@ -92,7 +92,7 @@ def main() -> None:
                 best = {"key": key, **row}
 
     sweep_df = pd.DataFrame(search_rows).sort_values(["f1", "recall", "precision"], ascending=False)
-    sweep_df.to_csv(bc.OUT_DIR / "lr_tuned_search_validation.csv", index=False)
+    sweep_df.to_csv(bc.LR_DIR / "lr_tuned_search_validation.csv", index=False)
     assert best is not None
     print(
         f"\nSelected config: C={best['C']}, pos_weight={best['pos_weight']}, "
@@ -138,9 +138,9 @@ def main() -> None:
             )
 
     out_df = pd.DataFrame(rows)
-    out_df.to_csv(bc.OUT_DIR / "lr_tuned_results.csv", index=False)
+    out_df.to_csv(bc.LR_DIR / "lr_tuned_results.csv", index=False)
     test_aug[(test_aug["y_pred_tuned"] == 0) & (test_aug["severe"] == 1)].to_csv(
-        bc.OUT_DIR / "lr_tuned_false_negatives.csv", index=False
+        bc.LR_DIR / "lr_tuned_false_negatives.csv", index=False
     )
 
     coef_df = pd.DataFrame(
@@ -150,7 +150,7 @@ def main() -> None:
             "odds_ratio": np.exp(final_lr.coef_[0]),
         }
     ).sort_values("coefficient", key=abs, ascending=False)
-    coef_df.to_csv(bc.OUT_DIR / "lr_tuned_coefficients.csv", index=False)
+    coef_df.to_csv(bc.LR_DIR / "lr_tuned_coefficients.csv", index=False)
 
     config_df = pd.DataFrame(
         [
@@ -164,17 +164,17 @@ def main() -> None:
             }
         ]
     )
-    config_df.to_csv(bc.OUT_DIR / "lr_tuned_selected_config.csv", index=False)
+    config_df.to_csv(bc.LR_DIR / "lr_tuned_selected_config.csv", index=False)
 
     print("\nSaved outputs:")
-    print(f"  {bc.OUT_DIR / 'lr_tuned_results.csv'}")
-    print(f"  {bc.OUT_DIR / 'lr_tuned_false_negatives.csv'}")
-    print(f"  {bc.OUT_DIR / 'lr_tuned_coefficients.csv'}")
-    print(f"  {bc.OUT_DIR / 'lr_tuned_search_validation.csv'}")
-    print(f"  {bc.OUT_DIR / 'lr_tuned_selected_config.csv'}")
+    print(f"  {bc.LR_DIR / 'lr_tuned_results.csv'}")
+    print(f"  {bc.LR_DIR / 'lr_tuned_false_negatives.csv'}")
+    print(f"  {bc.LR_DIR / 'lr_tuned_coefficients.csv'}")
+    print(f"  {bc.LR_DIR / 'lr_tuned_search_validation.csv'}")
+    print(f"  {bc.LR_DIR / 'lr_tuned_selected_config.csv'}")
 
     # Side-by-side with baseline row if available.
-    base_path = bc.OUT_DIR / "baseline_results.csv"
+    base_path = bc.BASELINE_DIR / "baseline_results.csv"
     if base_path.exists():
         base = pd.read_csv(base_path)
         base_main = base[base["model"] == "Logistic Regression"]

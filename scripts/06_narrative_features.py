@@ -31,8 +31,8 @@ warnings.filterwarnings("ignore")
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH    = PROJECT_ROOT / "Cleaned" / "sgo_cleaned_incidents.csv"
-OUT_DIR      = PROJECT_ROOT / "Modeling"
-OUT_DIR.mkdir(exist_ok=True)
+OUT_DIR      = PROJECT_ROOT / "Modeling" / "logistic_regression"
+OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # 1. Load and split (same temporal split as all other scripts)

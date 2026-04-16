@@ -32,8 +32,8 @@ def run_majority(train_df, test_df) -> list[dict]:
 def main() -> None:
     _, train_df, test_df = bc.load_and_split_verbose()
     rows = run_majority(train_df, test_df)
-    pd.DataFrame(rows).to_csv(bc.OUT_DIR / "majority_baseline_results.csv", index=False)
-    print(f"\n   Saved {bc.OUT_DIR / 'majority_baseline_results.csv'}")
+    pd.DataFrame(rows).to_csv(bc.BASELINE_DIR / "majority_baseline_results.csv", index=False)
+    print(f"\n   Saved {bc.BASELINE_DIR / 'majority_baseline_results.csv'}")
     print("\nDone.")
 
 

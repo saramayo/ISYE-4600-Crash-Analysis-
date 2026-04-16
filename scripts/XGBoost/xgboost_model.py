@@ -78,7 +78,7 @@ except ImportError:
 
 from sklearn.model_selection import GridSearchCV, StratifiedKFold  # noqa: E402
 
-OUT_DIR = bc.OUT_DIR   # Modeling/
+OUT_DIR = bc.XGB_DIR   # Modeling/xgboost/
 
 
 # ===========================================================================

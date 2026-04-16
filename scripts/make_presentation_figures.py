@@ -325,14 +325,14 @@ def main() -> None:
     fig_label_rule_schematic()
     fig_temporal_split(train_df, test_df)
     fig_reporting_bias_strata(df)
-    br = pd.read_csv(PROJECT_ROOT / "Modeling" / "baseline_results.csv")
+    br = pd.read_csv(PROJECT_ROOT / "Modeling" / "baselines" / "baseline_results.csv")
     fig_baseline_metrics(br)
     fig_confusion_heatmaps(br)
     fig_ads_vs_l2(br)
-    fn_path = PROJECT_ROOT / "Modeling" / "false_negatives.csv"
+    fn_path = PROJECT_ROOT / "Modeling" / "logistic_regression" / "false_negatives.csv"
     if fn_path.exists():
         fig_false_negatives(pd.read_csv(fn_path))
-    coef_path = PROJECT_ROOT / "Modeling" / "lr_coefficients.csv"
+    coef_path = PROJECT_ROOT / "Modeling" / "logistic_regression" / "lr_coefficients.csv"
     if coef_path.exists():
         fig_odds_ratios(coef_path)
     fig_clustering(df_known)

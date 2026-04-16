@@ -97,7 +97,7 @@ from sklearn.ensemble import RandomForestClassifier              # noqa: E402
 from sklearn.inspection import permutation_importance            # noqa: E402
 from sklearn.model_selection import GridSearchCV, StratifiedKFold  # noqa: E402
 
-OUT_DIR = bc.OUT_DIR   # Modeling/
+OUT_DIR = bc.RF_DIR    # Modeling/random_forest/
 
 
 # ===========================================================================

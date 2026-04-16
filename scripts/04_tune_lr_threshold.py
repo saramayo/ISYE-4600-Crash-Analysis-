@@ -92,7 +92,7 @@ def main(min_precision: float = 0.85) -> None:
 
     thresholds = np.round(np.arange(0.10, 0.91, 0.02), 2)
     sweep = pd.DataFrame([metrics_at_threshold(y_val, val_prob, t) for t in thresholds])
-    sweep.to_csv(bc.OUT_DIR / "lr_threshold_sweep_validation.csv", index=False)
+    sweep.to_csv(bc.LR_DIR / "lr_threshold_sweep_validation.csv", index=False)
 
     eligible = sweep[sweep["precision"] >= min_precision]
     if len(eligible):
@@ -113,7 +113,7 @@ def main(min_precision: float = 0.85) -> None:
             {"setting": f"tuned_{t_star:.2f}", **tuned_test},
         ]
     )
-    summary.to_csv(bc.OUT_DIR / "lr_threshold_selected_metrics.csv", index=False)
+    summary.to_csv(bc.LR_DIR / "lr_threshold_selected_metrics.csv", index=False)
     print("\nCurrent-era test metrics comparison:")
     print(summary.to_string(index=False))
 
@@ -135,8 +135,8 @@ def main(min_precision: float = 0.85) -> None:
     out_plot = fig_dir / "12_lr_threshold_tuning.png"
     plt.savefig(out_plot, dpi=150, bbox_inches="tight")
     plt.close()
-    print(f"\nWrote: {bc.OUT_DIR / 'lr_threshold_sweep_validation.csv'}")
-    print(f"Wrote: {bc.OUT_DIR / 'lr_threshold_selected_metrics.csv'}")
+    print(f"\nWrote: {bc.LR_DIR / 'lr_threshold_sweep_validation.csv'}")
+    print(f"Wrote: {bc.LR_DIR / 'lr_threshold_selected_metrics.csv'}")
     print(f"Wrote: {out_plot}")
 
 

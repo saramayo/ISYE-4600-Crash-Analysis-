@@ -94,15 +94,15 @@ def run_logistic(train_df, test_df, df_known) -> tuple[list[dict], pd.DataFrame,
 def main() -> None:
     df_known, train_df, test_df = bc.load_and_split_verbose()
     results, coef_df, fn_df = run_logistic(train_df, test_df, df_known)
-    pd.DataFrame(results).to_csv(bc.OUT_DIR / "logistic_regression_results.csv", index=False)
-    coef_df.to_csv(bc.OUT_DIR / "lr_coefficients.csv", index=False)
-    fn_df.to_csv(bc.OUT_DIR / "false_negatives.csv", index=False)
+    pd.DataFrame(results).to_csv(bc.LR_DIR / "logistic_regression_results.csv", index=False)
+    coef_df.to_csv(bc.LR_DIR / "lr_coefficients.csv", index=False)
+    fn_df.to_csv(bc.LR_DIR / "false_negatives.csv", index=False)
     print("\n" + "=" * 70)
     print("Saved outputs")
     print("=" * 70)
-    print(f"   {bc.OUT_DIR / 'logistic_regression_results.csv'}")
-    print(f"   {bc.OUT_DIR / 'lr_coefficients.csv'}")
-    print(f"   {bc.OUT_DIR / 'false_negatives.csv'}")
+    print(f"   {bc.LR_DIR / 'logistic_regression_results.csv'}")
+    print(f"   {bc.LR_DIR / 'lr_coefficients.csv'}")
+    print(f"   {bc.LR_DIR / 'false_negatives.csv'}")
     print("\nDone.")
 
 

@@ -157,12 +157,12 @@ def main() -> None:
     rows.extend([ads_metrics, l2_metrics])
 
     out_df = pd.DataFrame(rows)
-    out_csv = bc.OUT_DIR / "lr_stratified_by_level_results.csv"
+    out_csv = bc.LR_DIR / "lr_stratified_by_level_results.csv"
     out_df.to_csv(out_csv, index=False)
-    ads_coef.to_csv(bc.OUT_DIR / "lr_ads_coefficients.csv", index=False)
-    l2_coef.to_csv(bc.OUT_DIR / "lr_l2_coefficients.csv", index=False)
+    ads_coef.to_csv(bc.LR_DIR / "lr_ads_coefficients.csv", index=False)
+    l2_coef.to_csv(bc.LR_DIR / "lr_l2_coefficients.csv", index=False)
 
-    pooled_path = bc.OUT_DIR / "baseline_results.csv"
+    pooled_path = bc.BASELINE_DIR / "baseline_results.csv"
     pooled_df = pd.read_csv(pooled_path) if pooled_path.exists() else pd.DataFrame()
     plot_path = None
     if not pooled_df.empty:
@@ -170,8 +170,8 @@ def main() -> None:
 
     print("\nSaved outputs:")
     print(f"  {out_csv}")
-    print(f"  {bc.OUT_DIR / 'lr_ads_coefficients.csv'}")
-    print(f"  {bc.OUT_DIR / 'lr_l2_coefficients.csv'}")
+    print(f"  {bc.LR_DIR / 'lr_ads_coefficients.csv'}")
+    print(f"  {bc.LR_DIR / 'lr_l2_coefficients.csv'}")
     if plot_path is not None:
         print(f"  {plot_path}")
 

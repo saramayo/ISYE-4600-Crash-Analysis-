@@ -25,16 +25,16 @@ def main() -> None:
     lr_rows, coef_df, fn_df = run_logistic(train_df, test_df, df_known)
     rows.extend(lr_rows)
 
-    pd.DataFrame(rows).to_csv(bc.OUT_DIR / "baseline_results.csv", index=False)
-    coef_df.to_csv(bc.OUT_DIR / "lr_coefficients.csv", index=False)
-    fn_df.to_csv(bc.OUT_DIR / "false_negatives.csv", index=False)
+    pd.DataFrame(rows).to_csv(bc.BASELINE_DIR / "baseline_results.csv", index=False)
+    coef_df.to_csv(bc.LR_DIR / "lr_coefficients.csv", index=False)
+    fn_df.to_csv(bc.LR_DIR / "false_negatives.csv", index=False)
 
     print("\n" + "=" * 70)
     print("Saved (combined run)")
     print("=" * 70)
-    print(f"   {bc.OUT_DIR / 'baseline_results.csv'}")
-    print(f"   {bc.OUT_DIR / 'lr_coefficients.csv'}")
-    print(f"   {bc.OUT_DIR / 'false_negatives.csv'}")
+    print(f"   {bc.BASELINE_DIR / 'baseline_results.csv'}")
+    print(f"   {bc.LR_DIR / 'lr_coefficients.csv'}")
+    print(f"   {bc.LR_DIR / 'false_negatives.csv'}")
     print("\nDone.")
 
 
