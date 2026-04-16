@@ -1,4 +1,6 @@
-# ISYE 4600 — AV crash severity (SGO data)
+# ISYE-4600-Crash-Analysis-
+
+**ISYE 4600 — AV crash severity (NHTSA SGO data)** — cleaning, baselines, presentation figures.
 
 ## What runs the models?
 
