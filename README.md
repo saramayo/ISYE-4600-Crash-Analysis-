@@ -39,3 +39,9 @@ Paths inside the scripts use the project root (parent of `scripts/`), so they wo
 2. **Baselines** — `02_run_baselines.py` (both models, one table) **or** `majority_baseline.py` / `logistic_regression_baseline.py` separately. All read `Cleaned/sgo_cleaned_incidents.csv` and write under `Modeling/`.
 
 3. **Presentation figures** — After step 2, run `scripts/make_presentation_figures.py`. It writes PNGs to `Presentation/figures/` and a slide map in `Presentation/SLIDE_FIGURES.txt`.
+
+4. **Threshold tuning (optional improvement)** — Run `scripts/04_tune_lr_threshold.py` to tune the LR decision cutoff on archived validation data and compare default vs tuned performance on the current-era test set.
+
+5. **ADS/L2 stratified models (optional improvement)** — Run `scripts/05_stratified_models_ads_l2.py` to train separate LR models per automation level and compare against pooled-model slice metrics.
+
+6. **Tuned pooled LR (optional improvement)** — Run `scripts/06_tuned_logistic_regression.py` to tune `C`, positive-class weight, and decision threshold using archived validation; outputs tuned metrics and config under `Modeling/`.

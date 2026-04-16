@@ -1,0 +1,22 @@
+feature,description,overall_pct,severe_pct,nonsevere_pct
+nav_av_stopped,AV was stopped/parked/stationary at time of impact,22.7,9.5,58.4
+nav_av_moving,AV was traveling/proceeding at time of impact,23.6,13.0,52.4
+nav_av_turning,AV was making a left/right/U-turn,8.4,4.3,19.6
+nav_av_changing_lanes,AV was changing or merging lanes,2.1,1.2,4.5
+nav_av_reversing,AV was reversing/backing up,4.3,1.3,12.3
+nav_av_struck_other,AV initiated contact (AV struck the other party),20.3,9.7,49.0
+nav_other_struck_av,Other party initiated contact (struck the AV),25.9,11.8,63.9
+nav_rear_approach,Other party approached from behind / rear-end scenario,15.6,7.1,38.6
+nav_at_intersection,"Crash occurred at intersection, red light, or stop sign",14.1,7.7,31.4
+nav_on_highway,"Crash on freeway, highway, or interstate",3.1,3.4,2.1
+nav_in_parking_lot,Crash in parking lot or garage,3.3,1.6,7.8
+nav_left_turn,Left turn was involved in the crash sequence,5.2,2.7,12.0
+nav_lane_change,Lane change or merge was involved,2.0,1.1,4.2
+nav_vulnerable_user,"Pedestrian, cyclist, or other vulnerable road user involved",1.5,0.5,4.1
+nav_emergency_vehicle,Emergency or police vehicle involved,4.6,3.1,8.6
+nav_large_vehicle,"Bus, semi-truck, or heavy vehicle involved",4.0,2.7,7.4
+nav_av_disengaged,Operator disengaged / took manual control near crash,2.3,1.0,5.9
+nav_hazard_lights,AV had hazard/emergency lights on (unusual situation flag),1.8,1.3,3.3
+nav_double_parked,Double-parked or lane-blocking obstruction in the scene,0.3,0.1,1.0
+nav_speed_mentioned,A specific speed in mph was mentioned in the narrative,2.6,2.4,3.0
+nav_minor_damage_lang,"""Minor damage"" or ""no visible damage"" language present",2.7,0.5,8.5

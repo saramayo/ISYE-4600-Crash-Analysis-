@@ -1,0 +1,2 @@
+C,pos_weight,threshold,validation_f1,validation_recall,validation_precision
+10.0,1.0,0.48,0.9263592567102547,0.8925729442970822,0.9628040057224606
