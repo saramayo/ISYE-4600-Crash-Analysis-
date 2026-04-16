@@ -1,0 +1,257 @@
+column,dtype,n_nonnull,n_unique,example
+incident_key,str,5576,5576,0004894d4bb6897
+Report ID,str,5576,5576,13781-3301
+Report Version,int64,5576,7,2
+Reporting Entity,str,5576,56,"Tesla, Inc."
+Report Type,str,5576,5,10-Day Update
+Report Month,float64,5576,12,7.0
+Report Year,float64,5576,6,2024.0
+Report Submission Date,str,5576,55,JUL-2022
+VIN,str,5559,1613,5YJ3E1EBXMF
+VIN Decoded,str,5576,4, 
+Serial Number,str,694,2,[MAY CONTAIN PERSONALLY IDENTIFIABLE INFORMATION]
+Make,str,5576,80,Tesla
+Make - Unknown,str,5576,2,Unknown
+Model,str,5576,241,Model 3
+Model - Unknown,str,5576,2, 
+Model Year,float64,5576,13,2021.0
+Model Year - Unknown,str,5576,2, 
+Same Vehicle ID,str,5576,5001,bfdb35901b2efda
+Driver / Operator Type,str,5576,6,Consumer
+Automation Feature Version,str,5576,75,Unknown
+Automation Feature Version CBI,str,5576,3,Unknown
+Automation System Engaged?,str,5576,3,ADAS
+Engagement Status,str,5576,5,Unknown
+Operating Entity,str,5576,89,Unknown
+Operating Entity - Unknown,str,5576,2, 
+Source - Complaint/Claim,str,5576,2, 
+Source - Telematics,str,5576,2,Y
+Source - Law Enforcement,str,5576,2, 
+Source - Field Report,str,5576,2, 
+Source - Testing,str,5576,2, 
+Source - Media,str,5576,2, 
+Source - Internal Process Review,str,5576,3,Unknown
+Source - NHTSA VOQ,str,5576,3,Unknown
+Source - Other - See Narrative,str,5576,2,Unknown
+Source - Other Entity,str,5576,3,Unknown
+Source - State or Other Agency,str,5576,2,Unknown
+Incident Date,str,5576,69,JUL-2022
+Incident Date - Unknown,str,5576,2, 
+Incident Time (24:00),str,5576,1446,11:46
+Incident Time - Unknown,str,5576,2, 
+Same Incident ID,str,5576,5541,0004894d4bb6897
+Latitude,str,5576,2,[MAY CONTAIN PERSONALLY IDENTIFIABLE INFORMATION]
+Latitude - Unknown,str,5576,2, 
+Longitude,str,5576,2,[MAY CONTAIN PERSONALLY IDENTIFIABLE INFORMATION]
+Longitude - Unknown,str,5576,2, 
+Address,str,4889,1,[MAY CONTAIN PERSONALLY IDENTIFIABLE INFORMATION]
+Address - Unknown,str,5576,2, 
+City,str,5576,1739,Santa Monica
+City - Unknown,str,5576,2, 
+State,str,5576,101,CA 
+Zip Code,str,5576,2,[MAY CONTAIN PERSONALLY IDENTIFIABLE INFORMATION]
+Zip Code - Unknown,str,5576,2, 
+Roadway Type,str,5576,8,Intersection
+Roadway-Degraded Surface,str,5576,3,Unknown
+Roadway-Missing/Degraded Marking,str,5576,3,Unknown
+Roadway-No Unusual Conditions,str,5576,3,Unknown
+Roadway-Other-See Narrative,str,5576,3,Unknown
+Roadway-Traffic Incident,str,5576,3,Unknown
+Roadway-Unknown,str,5576,3,Unknown
+Roadway-Wet Surface Condition,str,5576,3,Unknown
+Roadway-Work Zone,str,5576,3,Unknown
+Weather - Clear,str,5576,2,Y
+Weather - Snow,str,5576,2, 
+Weather - Cloudy,str,5576,2, 
+Weather - Partly Cloudy,str,5576,3,Unknown
+Weather - Fog/Smoke/Haze,str,5576,2, 
+Weather - Rain,str,5576,2, 
+Weather - Severe Wind,str,5576,2, 
+Weather - Dust Storm,str,5576,2,Unknown
+Weather - Severe Hurricane,str,5576,2,Unknown
+Weather - Structure-Indoor,str,5576,3,Unknown
+Weather - Unk - See Narrative,str,5576,2, 
+Crash With,str,5576,17,Other Fixed Object
+Highest Injury Severity Alleged,str,5576,14,Unknown
+CP Pre-Crash Movement,str,5576,21,Unknown
+CP Contact Area - Rear Left,str,5576,3, 
+CP Contact Area - Left,str,5576,3, 
+CP Contact Area - Front Left,str,5576,3, 
+CP Contact Area - Rear,str,5576,3, 
+CP Contact Area - Top,str,5576,3, 
+CP Contact Area - Front,str,5576,3, 
+CP Contact Area - Rear Right,str,5576,3, 
+CP Contact Area - Right,str,5576,3, 
+CP Contact Area - Front Right,str,5576,3, 
+CP Contact Area - Bottom,str,5576,3, 
+CP Contact Area - Unknown,str,5576,3, 
+SV Pre-Crash Movement,str,5576,17,Proceeding Straight
+Any Air Bags Deployed?,str,5576,12,No
+Was Any Vehicle Towed?,str,5576,10,Yes
+Were All Passengers Belted?,str,5576,7,Unknown
+SV Precrash Speed (MPH),float64,5576,107,20.0
+SV Pre-crash Speed - Unknown,str,5576,2, 
+SV Contact Area - Rear Left,str,5576,2, 
+SV Contact Area - Left,str,5576,2, 
+SV Contact Area - Front Left,str,5576,2,Y
+SV Contact Area - Rear,str,5576,2, 
+SV Contact Area - Top,str,5576,2, 
+SV Contact Area - Front,str,5576,2,Y
+SV Contact Area - Rear Right,str,5576,2, 
+SV Contact Area - Right,str,5576,2, 
+SV Contact Area - Front Right,str,5576,2,Y
+SV Contact Area - Bottom,str,5576,2, 
+SV Contact Area - Unknown,str,5576,2, 
+Data Availability - EDR,str,5576,2,Y
+Data Availability - Police Rpt,str,5576,2, 
+Data Availability - Telematics,str,5576,2,Y
+Data Availability - Complaints,str,5576,2, 
+Data Availability - Video,str,5576,2,Y
+Data Availability - Other,str,5576,2,Y
+Data Availability - No Data,str,5576,2, 
+Data Availability - Unknown,str,5576,2, 
+Investigating Agency,str,5576,182,Unknown
+Investigating Agency - Unknown,str,5576,2,Y
+Within ODD?,str,5576,6,"[REDACTED, MAY CONTAIN CONFIDENTIAL BUSINESS INFORMATION]"
+Within ODD? - CBI,str,5576,2,Y
+Narrative,str,5576,2553,"[REDACTED, MAY CONTAIN CONFIDENTIAL BUSINESS INFORMATION]"
+Narrative - CBI?,str,5576,2,Y
+automation_level,str,5576,2,L2
+era,str,5576,2,archived
+Mileage,float64,5576,3830,23108.0
+Mileage - Unknown,str,5576,3, 
+ADAS/ADS System Version,str,5576,199,"[REDACTED, MAY CONTAIN CONFIDENTIAL BUSINESS INFORMATION]"
+ADAS/ADS System Version - Unk,str,5576,3, 
+ADAS/ADS System Version CBI,str,5576,3,Y
+ADAS/ADS Hardware Version,str,5576,108,Unknown
+ADAS/ADS Hardware Version - Unk,str,5576,3, 
+ADAS/ADS Hardware Version CBI,str,5576,3, 
+ADAS/ADS Software Version,str,5576,115,Unknown
+ADAS/ADS Software Version - Unk,str,5576,3, 
+ADAS/ADS Software Version CBI,str,5576,3, 
+Other Reporting Entities?,str,5576,20,Unknown
+Other Reporting Entities? - Unk,str,5576,3, 
+Other Reporting Entities? - NA,str,5576,3, 
+Federal Regulatory Exemption?,str,5576,5,Unknown
+Other Federal Reg. Exemption,str,5576,4,Unknown
+Federal Reg. Exemption - Unk,str,5576,3, 
+Federal Reg. Exemption - No,str,5576,3, 
+State or Local Permit?,str,5576,3,Unknown
+State or Local Permit,str,5576,64,Unknown
+ADS Equipped?,str,5576,3,No
+Source - Other,str,5576,3, 
+Source - Other Text,str,5576,77,Unknown
+Notice Received Date,str,5576,50,JUL-2022
+Roadway Surface,str,5576,5,Dry
+Roadway Description,str,5576,6,No Unusual Conditions
+Posted Speed Limit (MPH),float64,5576,24,45.0
+Posted Speed Limit - Unknown,str,5576,3, 
+Lighting,str,5576,7,Dark - Lighted
+Weather - Other,str,5576,3, 
+Weather - Other Text,str,5576,14,Unknown
+Property Damage?,str,5576,3,Yes
+CP Any Air Bags Deployed?,str,5576,4,Unknown
+CP Was Vehicle Towed?,str,5576,4,Unknown
+Law Enforcement Investigating?,str,5576,3,Unknown
+Rep Ent Or Mfr Investigating?,str,5576,3,Unknown
+Investigating Officer Name,str,335,1,[MAY CONTAIN PERSONALLY IDENTIFIABLE INFORMATION]
+Inv. Officer Name - Unknown,str,5576,3,Y
+Investigating Officer Phone,str,114,1,[MAY CONTAIN PERSONALLY IDENTIFIABLE INFORMATION]
+Inv. Officer Phone - Unknown,str,5576,3,Y
+Investigating Officer Email,str,41,1,[MAY CONTAIN PERSONALLY IDENTIFIABLE INFORMATION]
+Inv. Officer Email - Unknown,str,5576,3,Y
+injury_rank,float64,2680,5,0.0
+airbag_flag,float64,5462,2,0.0
+towed_flag,float64,2910,2,1.0
+injury_flag,float64,2680,2,0.0
+severe,int64,5576,2,1
+severity_known,int64,5576,2,1
+Report Month__is_missing,int64,5576,2,1
+Report Year__is_missing,int64,5576,2,1
+VIN Decoded__is_missing,int64,5576,2,0
+Make - Unknown__is_missing,int64,5576,2,1
+Model__is_missing,int64,5576,2,0
+Model Year__is_missing,int64,5576,2,0
+Driver / Operator Type__is_missing,int64,5576,2,0
+Automation Feature Version__is_missing,int64,5576,2,1
+Automation Feature Version CBI__is_missing,int64,5576,2,1
+Engagement Status__is_missing,int64,5576,2,1
+Operating Entity__is_missing,int64,5576,2,1
+Source - Internal Process Review__is_missing,int64,5576,2,1
+Source - NHTSA VOQ__is_missing,int64,5576,2,1
+Source - Other - See Narrative__is_missing,int64,5576,2,1
+Source - Other Entity__is_missing,int64,5576,2,1
+Source - State or Other Agency__is_missing,int64,5576,2,1
+Incident Date__is_missing,int64,5576,2,0
+Incident Time (24:00)__is_missing,int64,5576,2,0
+Latitude__is_missing,int64,5576,2,0
+Longitude__is_missing,int64,5576,2,0
+City__is_missing,int64,5576,2,0
+State__is_missing,int64,5576,2,0
+Zip Code__is_missing,int64,5576,2,0
+Roadway-Degraded Surface__is_missing,int64,5576,2,1
+Roadway-Missing/Degraded Marking__is_missing,int64,5576,2,1
+Roadway-No Unusual Conditions__is_missing,int64,5576,2,1
+Roadway-Other-See Narrative__is_missing,int64,5576,2,1
+Roadway-Traffic Incident__is_missing,int64,5576,2,1
+Roadway-Unknown__is_missing,int64,5576,2,1
+Roadway-Wet Surface Condition__is_missing,int64,5576,2,1
+Roadway-Work Zone__is_missing,int64,5576,2,1
+Weather - Partly Cloudy__is_missing,int64,5576,2,1
+Weather - Dust Storm__is_missing,int64,5576,2,1
+Weather - Severe Hurricane__is_missing,int64,5576,2,1
+Weather - Structure-Indoor__is_missing,int64,5576,2,1
+CP Pre-Crash Movement__is_missing,int64,5576,2,1
+CP Contact Area - Rear Left__is_missing,int64,5576,2,0
+CP Contact Area - Left__is_missing,int64,5576,2,0
+CP Contact Area - Front Left__is_missing,int64,5576,2,0
+CP Contact Area - Rear__is_missing,int64,5576,2,0
+CP Contact Area - Top__is_missing,int64,5576,2,0
+CP Contact Area - Front__is_missing,int64,5576,2,0
+CP Contact Area - Rear Right__is_missing,int64,5576,2,0
+CP Contact Area - Right__is_missing,int64,5576,2,0
+CP Contact Area - Front Right__is_missing,int64,5576,2,0
+CP Contact Area - Bottom__is_missing,int64,5576,2,0
+CP Contact Area - Unknown__is_missing,int64,5576,2,0
+SV Precrash Speed (MPH)__is_missing,int64,5576,2,0
+Investigating Agency__is_missing,int64,5576,2,1
+Within ODD?__is_missing,int64,5576,2,0
+Mileage__is_missing,int64,5576,2,0
+Mileage - Unknown__is_missing,int64,5576,2,0
+ADAS/ADS System Version__is_missing,int64,5576,2,0
+ADAS/ADS System Version - Unk__is_missing,int64,5576,2,0
+ADAS/ADS System Version CBI__is_missing,int64,5576,2,0
+ADAS/ADS Hardware Version__is_missing,int64,5576,2,1
+ADAS/ADS Hardware Version - Unk__is_missing,int64,5576,2,0
+ADAS/ADS Hardware Version CBI__is_missing,int64,5576,2,0
+ADAS/ADS Software Version__is_missing,int64,5576,2,1
+ADAS/ADS Software Version - Unk__is_missing,int64,5576,2,0
+ADAS/ADS Software Version CBI__is_missing,int64,5576,2,0
+Other Reporting Entities?__is_missing,int64,5576,2,1
+Other Reporting Entities? - Unk__is_missing,int64,5576,2,0
+Other Reporting Entities? - NA__is_missing,int64,5576,2,0
+Federal Regulatory Exemption?__is_missing,int64,5576,2,1
+Other Federal Reg. Exemption__is_missing,int64,5576,2,1
+Federal Reg. Exemption - Unk__is_missing,int64,5576,2,0
+Federal Reg. Exemption - No__is_missing,int64,5576,2,0
+State or Local Permit?__is_missing,int64,5576,2,1
+State or Local Permit__is_missing,int64,5576,2,1
+ADS Equipped?__is_missing,int64,5576,2,0
+Source - Other__is_missing,int64,5576,2,0
+Source - Other Text__is_missing,int64,5576,2,1
+Notice Received Date__is_missing,int64,5576,2,0
+Roadway Surface__is_missing,int64,5576,2,0
+Roadway Description__is_missing,int64,5576,2,0
+Posted Speed Limit (MPH)__is_missing,int64,5576,2,0
+Posted Speed Limit - Unknown__is_missing,int64,5576,2,0
+Lighting__is_missing,int64,5576,2,0
+Weather - Other__is_missing,int64,5576,2,0
+Weather - Other Text__is_missing,int64,5576,2,1
+Property Damage?__is_missing,int64,5576,2,0
+CP Any Air Bags Deployed?__is_missing,int64,5576,2,1
+CP Was Vehicle Towed?__is_missing,int64,5576,2,1
+Law Enforcement Investigating?__is_missing,int64,5576,2,0
+Rep Ent Or Mfr Investigating?__is_missing,int64,5576,2,0
+Inv. Officer Name - Unknown__is_missing,int64,5576,2,0
+Inv. Officer Phone - Unknown__is_missing,int64,5576,2,0
+Inv. Officer Email - Unknown__is_missing,int64,5576,2,0

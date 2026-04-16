@@ -1,0 +1,2 @@
+model,precision,recall,f1,roc_auc,TP,FP,FN,TN,fn_rate
+Majority-class baseline,0.7574007220216606,1.0,0.8619556285949055,,1049,336,0,0,0.0
