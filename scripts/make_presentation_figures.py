@@ -200,23 +200,89 @@ def fig_confusion_heatmaps(br: pd.DataFrame) -> None:
     _save("06_confusion_matrices")
 
 
-def fig_ads_vs_l2(br: pd.DataFrame) -> None:
-    sub = br[br["model"].str.startswith("LR — test", na=False)].copy()
-    if sub.empty:
+def fig_stratified_models(strat: pd.DataFrame) -> None:
+    """Primary results: separate ADS and L2 models, side by side."""
+    if strat.empty:
         return
-    fig, ax = plt.subplots(figsize=(9, 5))
-    labs = [m.replace("LR — test [", "").replace("]", "") for m in sub["model"]]
-    x = np.arange(len(labs))
-    w = 0.25
-    for j, m in enumerate(["precision", "recall", "f1"]):
-        ax.bar(x + (j - 1) * w, sub[m], width=w, label=m.capitalize())
-    ax.set_xticks(x + w * 0)
-    ax.set_xticklabels(labs)
-    ax.set_ylim(0, 1.05)
-    ax.legend()
-    style_axes(ax, "Logistic regression — same test set, sliced by automation level")
+    fig, axes = plt.subplots(1, 2, figsize=WIDE, sharey=False)
+    metrics = ["precision", "recall", "f1"]
+    colors = ["#4C72B0", "#55A868", "#C44E52"]
+    labels = ["Precision", "Recall", "F1"]
+
+    for ax, (_, row) in zip(axes, strat.iterrows()):
+        level = row["automation_level"]
+        vals = [row[m] for m in metrics]
+        bars = ax.bar(labels, vals, color=colors, width=0.5)
+        for bar, v in zip(bars, vals):
+            ax.text(bar.get_x() + bar.get_width() / 2, v + 0.02, f"{v:.2f}",
+                    ha="center", va="bottom", fontsize=11, fontweight="semibold")
+        feat = str(row.get("feature_set", "")).replace("_", " ")
+        thr = float(row.get("threshold", 0.5))
+        ax.set_ylim(0, 1.15)
+        ax.set_title(f"{level} model\n({feat}, threshold={thr:.2f})",
+                     fontsize=13, fontweight="semibold")
+        ax.set_ylabel("Score")
+        auc = row["roc_auc"]
+        fn = row["fn_rate"]
+        ax.text(0.98, 0.97, f"AUC={auc:.3f}\nFN-rate={fn:.1%}",
+                transform=ax.transAxes, ha="right", va="top",
+                fontsize=10, bbox=dict(boxstyle="round,pad=0.3", facecolor="#f5f5f5"))
+
+    fig.suptitle("Separate LR models per automation level — primary results",
+                 fontsize=14, fontweight="semibold")
     plt.tight_layout()
-    _save("07_ads_vs_l2_metrics")
+    _save("07_stratified_model_results_ads_l2")
+
+
+def fig_stratified_confusion_matrices(strat: pd.DataFrame) -> None:
+    """Confusion matrix heatmaps for the ADS and L2 stratified models."""
+    if strat.empty:
+        return
+    fig, axes = plt.subplots(1, 2, figsize=WIDE)
+    for ax, (_, row) in zip(axes, strat.iterrows()):
+        level = row["automation_level"]
+        cm = np.array([[int(row["TN"]), int(row["FP"])],
+                       [int(row["FN"]), int(row["TP"])]])
+        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", cbar=False, ax=ax,
+                    xticklabels=["Pred Non-severe", "Pred Severe"],
+                    yticklabels=["True Non-severe", "True Severe"],
+                    annot_kws={"size": 13})
+        feat = str(row.get("feature_set", "")).replace("_", " ")
+        ax.set_title(f"{level} — {feat}", fontsize=13, fontweight="semibold")
+    fig.suptitle("Confusion matrices — stratified LR models (current-era test)",
+                 fontsize=14, fontweight="semibold", y=1.02)
+    plt.tight_layout()
+    _save("14_stratified_confusion_matrices_ads_l2")
+
+
+def fig_ads_improvement(br: pd.DataFrame, strat: pd.DataFrame) -> None:
+    """Before/after: pooled LR ADS slice vs stratified ADS model."""
+    pooled_ads = br[br["model"] == "LR — test [ADS]"]
+    strat_ads = strat[strat["automation_level"] == "ADS"]
+    if pooled_ads.empty or strat_ads.empty:
+        return
+
+    metrics = ["precision", "recall", "f1"]
+    labels = ["Precision", "Recall", "F1"]
+    pooled_vals = [float(pooled_ads.iloc[0][m]) for m in metrics]
+    strat_vals = [float(strat_ads.iloc[0][m]) for m in metrics]
+
+    fig, ax = plt.subplots(figsize=(9, 5))
+    x = np.arange(len(metrics))
+    w = 0.35
+    ax.bar(x - w / 2, pooled_vals, width=w, label="Pooled LR (ADS slice)", color="#4C72B0", alpha=0.8)
+    ax.bar(x + w / 2, strat_vals, width=w, label="Stratified ADS model\n(narrative flags, tuned threshold)",
+           color="#DD8452", alpha=0.9)
+    for i, (pv, sv) in enumerate(zip(pooled_vals, strat_vals)):
+        ax.text(i - w / 2, pv + 0.02, f"{pv:.2f}", ha="center", fontsize=10)
+        ax.text(i + w / 2, sv + 0.02, f"{sv:.2f}", ha="center", fontsize=10)
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, fontsize=12)
+    ax.set_ylim(0, 1.15)
+    ax.legend(fontsize=10)
+    style_axes(ax, "ADS model: pooled LR failure → stratified fix")
+    plt.tight_layout()
+    _save("15_ads_pooled_vs_stratified_improvement")
 
 
 def fig_false_negatives(fn: pd.DataFrame) -> None:
@@ -325,14 +391,22 @@ def main() -> None:
     fig_label_rule_schematic()
     fig_temporal_split(train_df, test_df)
     fig_reporting_bias_strata(df)
+
     br = pd.read_csv(PROJECT_ROOT / "Modeling" / "baselines" / "baseline_results.csv")
     fig_baseline_metrics(br)
     fig_confusion_heatmaps(br)
-    fig_ads_vs_l2(br)
+
+    # Primary framing: separate ADS and L2 models
+    strat_path = PROJECT_ROOT / "Modeling" / "logistic_regression" / "lr_stratified_by_level_results.csv"
+    strat = pd.read_csv(strat_path) if strat_path.exists() else pd.DataFrame()
+    fig_stratified_models(strat)
+    fig_stratified_confusion_matrices(strat)
+    fig_ads_improvement(br, strat)
+
     fn_path = PROJECT_ROOT / "Modeling" / "logistic_regression" / "false_negatives.csv"
     if fn_path.exists():
         fig_false_negatives(pd.read_csv(fn_path))
-    coef_path = PROJECT_ROOT / "Modeling" / "logistic_regression" / "lr_coefficients.csv"
+    coef_path = PROJECT_ROOT / "Modeling" / "logistic_regression" / "lr_ads_coefficients.csv"
     if coef_path.exists():
         fig_odds_ratios(coef_path)
     fig_clustering(df_known)
@@ -354,13 +428,16 @@ def main() -> None:
             "  02 — Label rule (methods)",
             "  01 — Outcome + OR components (methods / data)",
             "  03 — Temporal split (methods)",
-            "  04 — Reporting bias strata (limitations)",
-            "  05–06 — Baselines + confusion matrices (results)",
-            "  07 — ADS vs L2 (results / limitations)",
+            "  04 — Reporting bias strata (limitations / motivation for stratified approach)",
+            "  05–06 — Pooled baselines + confusion matrices (context / what failed)",
+            "  15 — ADS pooled vs stratified: before/after improvement story",
+            "  07 — Primary results: separate ADS and L2 models (main result)",
+            "  14 — Stratified confusion matrices (ADS and L2 side by side)",
             "  08 — False negatives (error analysis)",
-            "  09 — Odds ratios (interpretation)",
+            "  09 — Odds ratios / narrative coefficients (interpretation)",
             "  10 — Clustering (methods / exploratory results)",
             "  11 — Interpretation for system (discussion)",
+            "  13 — Pooled vs stratified bar comparison (appendix / backup)",
         ]
     )
     MAP_PATH.write_text("\n".join(lines), encoding="utf-8")

@@ -1,0 +1,97 @@
+feature,importance
+Report Month,0.21263817
+nav_vulnerable_user,0.075229615
+Crash With_Non-Motorist: Cyclist,0.06880119
+Crash With_Motorcycle,0.04489734
+Crash With_Non-Motorist: Other,0.035514
+nav_av_moving,0.024126874
+"SV Pre-Crash Movement_Other, see Narrative",0.02266572
+CP Pre-Crash Movement_Proceeding Straight,0.017465362
+nav_minor_damage_lang,0.016276155
+nav_av_turning,0.015672354
+Crash With_Bus,0.015268643
+nav_av_struck_other,0.014939571
+nav_large_vehicle,0.014739021
+Crash With_SUV,0.014559119
+Weather - Clear_ ,0.014425481
+SV Pre-Crash Movement_Stopped,0.014151616
+nav_emergency_vehicle,0.014108947
+CP Pre-Crash Movement_Making Left Turn,0.0134168435
+nav_left_turn,0.012666827
+SV Pre-Crash Movement_Making Left Turn,0.012312547
+SV Precrash Speed (MPH),0.011973669
+SV Pre-Crash Movement_Parked,0.011830874
+Crash With_Other Fixed Object,0.011767457
+Crash With_Heavy Truck,0.011763318
+Crash With_Pickup Truck,0.0116760945
+nav_rear_approach,0.011656444
+CP Pre-Crash Movement_Traveling Wrong Way,0.011398412
+nav_av_disengaged,0.011055466
+CP Pre-Crash Movement_Passing,0.011001958
+Weather - Cloudy_ ,0.010764751
+nav_av_changing_lanes,0.01012896
+Roadway Type_Intersection,0.009804943
+Crash With_Passenger Car,0.009786429
+nav_in_parking_lot,0.009426534
+"Crash With_Other, see Narrative",0.00939438
+Roadway Type_Street,0.009370953
+nav_speed_mentioned,0.009296148
+nav_av_reversing,0.0091823395
+SV Pre-Crash Movement_Proceeding Straight,0.009058162
+nav_other_struck_av,0.008929201
+Roadway Type_Highway / Freeway,0.008911635
+Crash With_Van,0.008530192
+nav_lane_change,0.007934218
+CP Pre-Crash Movement_Parked,0.007594427
+nav_hazard_lights,0.007544818
+SV Pre-Crash Movement_Lane / Road Departure,0.007106399
+CP Pre-Crash Movement_Unknown,0.0069351722
+SV Pre-Crash Movement_Changing Lanes,0.006797714
+"CP Pre-Crash Movement_Other, see Narrative",0.0066403323
+nav_at_intersection,0.006097274
+CP Pre-Crash Movement_Making Right Turn,0.005903943
+Roadway Type_Parking Lot,0.005843474
+CP Pre-Crash Movement_Stopped,0.005793687
+CP Pre-Crash Movement_Changing Lanes,0.005408916
+CP Pre-Crash Movement_Backing,0.005245932
+Weather - Rain_ ,0.0052048927
+nav_av_stopped,0.0048539327
+CP Pre-Crash Movement_Lane / Road Departure,0.004511162
+Crash With_Animal,0.0
+SV Pre-Crash Movement_Unknown,0.0
+CP Pre-Crash Movement_Crossing into Opposing Lane,0.0
+CP Pre-Crash Movement_Entering Traffic,0.0
+Automation System Engaged?_ADAS,0.0
+CP Pre-Crash Movement_Merging,0.0
+CP Pre-Crash Movement_Making U-Turn,0.0
+"Automation System Engaged?_Unknown, see Narrative",0.0
+CP Pre-Crash Movement_NM Crossing Roadway,0.0
+CP Pre-Crash Movement_NM Moving on Sidewalk,0.0
+CP Pre-Crash Movement_NM in Roadway - Other,0.0
+nav_double_parked,0.0
+CP Pre-Crash Movement_Parking Maneuver,0.0
+nav_on_highway,0.0
+Automation System Engaged?_ADS,0.0
+SV Pre-Crash Movement_Parking Maneuver,0.0
+SV Pre-Crash Movement_Passing,0.0
+Weather - Cloudy_Y,0.0
+Weather - Severe Wind_ ,0.0
+Weather - Fog/Smoke/Haze_Y,0.0
+Weather - Fog/Smoke/Haze_ ,0.0
+Weather - Snow_Y,0.0
+Crash With_Non-Motorist: Pedestrian,0.0
+Weather - Snow_ ,0.0
+Weather - Rain_Y,0.0
+Weather - Clear_Y,0.0
+Roadway-Traffic Incident_Unknown,0.0
+Crash With_Unknown,0.0
+Roadway-Work Zone_Unknown,0.0
+SV Pre-Crash Movement_Backing,0.0
+SV Pre-Crash Movement_Crossing into Opposing Lane,0.0
+SV Pre-Crash Movement_Entering Traffic,0.0
+Roadway-Wet Surface Condition_Unknown,0.0
+Roadway Type_Unknown,0.0
+SV Pre-Crash Movement_Making Right Turn,0.0
+SV Pre-Crash Movement_Merging,0.0
+Roadway Type_Traffic Circle,0.0
+Crash With_First Responder Vehicle,0.0

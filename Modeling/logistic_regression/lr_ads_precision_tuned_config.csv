@@ -1,0 +1,2 @@
+pos_weight,C,threshold,val_precision,val_recall,val_f1,precision_floor_met
+balanced,3.0,0.48,0.3470319634703196,0.7676767676767676,0.47798742138364786,False

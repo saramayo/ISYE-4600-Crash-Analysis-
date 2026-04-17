@@ -1,0 +1,8 @@
+cluster,n,pct_of_ads,severe_rate,top_Roadway_Type,top_Crash_With,top_SV_Pre-Crash_Movement,top_CP_Pre-Crash_Movement,scenario_label
+0,303,14.3,32.7,Street (62%),Passenger Car (34%),Stopped (50%),Proceeding Straight (41%),Other vehicle struck AV — 33% severe
+1,82,3.9,41.5,Street (45%),Other Fixed Object (95%),Proceeding Straight (60%),Unknown (100%),AV hit fixed object — 42% severe
+2,1185,56.0,26.0,Street (56%),Passenger Car (41%),Stopped (47%),Proceeding Straight (43%),Typical street crash (AV stopped) — 26% severe
+3,77,3.6,31.2,Street (62%),Passenger Car (45%),Stopped (51%),Proceeding Straight (30%),AV struck other party — 31% severe
+4,22,1.0,0.0,Street (77%),Animal (100%),Proceeding Straight (91%),"Other, see Narrative (82%)",Animal strike — 0% severe
+5,446,21.1,47.8,Street (62%),Passenger Car (36%),Stopped (48%),Proceeding Straight (40%),AV moving at impact — 48% severe
+6,1,0.0,0.0,Street (100%),SUV (100%),Proceeding Straight (100%),Proceeding Straight (100%),Pedestrian / cyclist involved — 0% severe
