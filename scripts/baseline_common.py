@@ -18,13 +18,14 @@ warnings.filterwarnings("ignore")
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH = PROJECT_ROOT / "Cleaned" / "sgo_cleaned_incidents.csv"
-OUT_DIR      = PROJECT_ROOT / "Modeling"
-LR_DIR       = OUT_DIR / "logistic_regression"
-RF_DIR       = OUT_DIR / "random_forest"
-XGB_DIR      = OUT_DIR / "xgboost"
-BASELINE_DIR = OUT_DIR / "baselines"
+OUT_DIR         = PROJECT_ROOT / "Modeling"
+LR_DIR          = OUT_DIR / "logistic_regression"
+RF_DIR          = OUT_DIR / "random_forest"
+XGB_DIR         = OUT_DIR / "xgboost"
+BASELINE_DIR    = OUT_DIR / "baselines"
+CLUSTERING_DIR  = OUT_DIR / "clustering"
 
-for _d in (OUT_DIR, LR_DIR, RF_DIR, XGB_DIR, BASELINE_DIR):
+for _d in (OUT_DIR, LR_DIR, RF_DIR, XGB_DIR, BASELINE_DIR, CLUSTERING_DIR):
     _d.mkdir(exist_ok=True)
 
 CONTEXT_FEATURES_BASE = [
