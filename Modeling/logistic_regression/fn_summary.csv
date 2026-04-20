@@ -1,0 +1,3 @@
+model,total_severe_test,FN,fn_rate,top_roadway,top_crash_with
+XGB [ADS],283,19,0.06713780918727916,Street,SUV
+LR [L2],766,19,0.024804177545691905,Highway / Freeway,"Other, see Narrative"

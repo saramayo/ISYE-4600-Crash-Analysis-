@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AV Crash Severity — ISYE 4600</title>
+<style>
+  :root {
+    --navy:  #1a355e;
+    --blue:  #2e75b6;
+    --gold:  #c59a2e;
+    --lgray: #f2f4f7;
+    --ltblue:#d6e4f0;
+    --dark:  #1a1a2e;
+    --mgray: #6b6b6b;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--lgray);
+    color: var(--dark);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  /* ── header ── */
+  .report-header {
+    background: var(--navy);
+    color: white;
+    padding: 52px 60px 40px;
+    border-bottom: 6px solid var(--gold);
+  }
+  .report-header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .report-header .meta {
+    color: var(--ltblue);
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  .report-header .authors {
+    color: var(--ltblue);
+    font-size: 0.95rem;
+    margin-top: 4px;
+  }
+
+  /* ── layout ── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── sections ── */
+  section {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 40px 44px;
+    margin-top: 36px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+
+  section h2 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--navy);
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--gold);
+    margin-bottom: 22px;
+  }
+
+  section h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 24px 0 10px;
+  }
+
+  p { margin-bottom: 14px; }
+
+  ul {
+    padding-left: 22px;
+    margin-bottom: 14px;
+  }
+  ul li { margin-bottom: 6px; }
+
+  /* ── figures ── */
+  .fig {
+    margin: 28px 0;
+    text-align: center;
+  }
+  .fig img {
+    max-width: 100%;
+    border: 1px solid #dde3ec;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+  }
+  .fig figcaption {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--mgray);
+    font-style: italic;
+  }
+
+  /* ── callout boxes ── */
+  .callout {
+    background: var(--navy);
+    color: white;
+    border-radius: 5px;
+    padding: 18px 24px;
+    margin: 20px 0;
+    font-size: 0.97rem;
+  }
+  .callout strong { color: var(--gold); }
+
+  .callout-blue {
+    background: var(--ltblue);
+    color: var(--dark);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 5px 5px 0;
+    padding: 14px 20px;
+    margin: 20px 0;
+    font-size: 0.95rem;
+  }
+  .callout-blue strong { color: var(--navy); }
+
+  /* ── tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.92rem;
+  }
+  thead tr { background: var(--navy); color: white; }
+  thead th { padding: 10px 14px; text-align: left; font-weight: 600; }
+  tbody tr:nth-child(even) { background: var(--ltblue); }
+  tbody tr:nth-child(odd)  { background: var(--white); }
+  tbody td { padding: 9px 14px; }
+  tbody tr.highlight td { font-weight: 700; color: var(--navy); }
+
+  /* ── stat cards ── */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .stat-card {
+    flex: 1;
+    min-width: 140px;
+    background: var(--lgray);
+    border-radius: 6px;
+    padding: 18px 16px;
+    text-align: center;
+    border-top: 4px solid var(--navy);
+  }
+  .stat-card .num {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+  .stat-card .num.gold { color: var(--gold); }
+  .stat-card .label {
+    font-size: 0.78rem;
+    color: var(--mgray);
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── footer ── */
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--mgray);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="report-header">
+  <h1>Predicting Crash Severity in<br>Autonomous Vehicle Incidents</h1>
+  <div class="meta">ISYE 4600 &nbsp;·&nbsp; Spring 2026 &nbsp;·&nbsp; Georgia Institute of Technology</div>
+  <div class="authors">Santiago Aramayo Velasco &nbsp;·&nbsp; Lauren McDonald &nbsp;·&nbsp; Luis Velez</div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>1. The Problem</h2>
+
+  <p>NHTSA requires autonomous vehicle (AV) operators to report every crash they are involved in. The result is thousands of incident reports per year — but not all crashes are equal. A minor fender-bender where a stopped AV is rear-ended at 2 mph is completely different from a crash that injures an occupant, deploys an airbag, or requires a tow truck.</p>
+
+  <p>Safety engineers need to triage these reports: which ones need immediate investigation, and which can wait? Doing this by hand at scale is infeasible. Our goal was to build a classifier that reads an incoming report and flags it as <strong>severe</strong> or <strong>not severe</strong> automatically.</p>
+
+  <div class="callout">
+    <strong>Key constraint:</strong> A missed severe crash (false negative) is far more costly than a false alarm. A model that flags too many reports wastes reviewer time — but a model that misses a severe crash could allow a systemic AV safety issue to go uninvestigated.
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>2. The Data</h2>
+
+  <p>We used NHTSA Standing General Order (SGO) incident reports — four CSV files covering two automation levels across two reporting eras.</p>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">5,567</div><div class="label">Total incidents</div></div>
+    <div class="stat-card"><div class="num">2,116</div><div class="label">ADS incidents</div></div>
+    <div class="stat-card"><div class="num">3,451</div><div class="label">L2 incidents</div></div>
+    <div class="stat-card"><div class="num">21</div><div class="label">Narrative features</div></div>
+  </div>
+
+  <p><strong>ADS (Automated Driving System, Level 4+)</strong> — fully autonomous vehicles such as Waymo and Cruise. The system controls all driving tasks with no human required to intervene.</p>
+  <p><strong>L2 (Level 2 driver-assist)</strong> — systems like Tesla Autopilot where a human driver must remain engaged and responsible.</p>
+
+  <figure class="fig">
+    <img src="figures/04_reporting_bias_severe_rate_by_stratum.png" alt="Severe rate by stratum">
+    <figcaption>Figure 1 — Severe rate by automation level and era. The ADS severe rate nearly doubled from training to test (+21 pp). L2 barely moved. This distribution shift is the core challenge.</figcaption>
+  </figure>
+
+  <div class="callout-blue">
+    <strong>The distribution shift problem:</strong> In training, only 26% of ADS crashes were severe. In the test era, 47.4% were severe — a jump of 21 percentage points. L2 stayed stable at ~98%. Any model that mixes these two groups will learn the wrong thing.
+  </div>
+
+  <table>
+    <thead><tr><th>Stratum</th><th>N</th><th>Severe Rate</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>ADS — archived</td><td>1,519</td><td>26.0%</td><td>Train</td></tr>
+      <tr><td>ADS — current</td><td>597</td><td>47.4%</td><td>Test</td></tr>
+      <tr><td>L2 — archived</td><td>2,663</td><td>98.3%</td><td>Train</td></tr>
+      <tr><td>L2 — current</td><td>788</td><td>97.2%</td><td>Test</td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>3. What "Severe" Means</h2>
+
+  <p>A crash is labeled <strong>severe = 1</strong> if any of the following is true:</p>
+
+  <figure class="fig">
+    <img src="figures/02_severity_label_rule_schematic.png" alt="Severity label schematic">
+    <figcaption>Figure 2 — The severity label is an OR rule across three observable outcomes: injury, airbag deployment, or vehicle towed.</figcaption>
+  </figure>
+
+  <ul>
+    <li><strong>Injury flag</strong> — at least one person reported injured</li>
+    <li><strong>Airbag flag</strong> — at least one airbag deployed (indicates high-energy impact even without injury)</li>
+    <li><strong>Tow flag</strong> — vehicle towed from scene (non-driveable damage even if no one was hurt)</li>
+  </ul>
+
+  <p>We used an OR rule because any one of these outcomes signals a crash worth prioritizing. We were careful never to use outcome words — "injured," "towed," "airbag deployed" — as input features, since those words directly describe the label itself. Using them would be data leakage.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>4. Train / Test Split</h2>
+
+  <p>We used a <strong>temporal split</strong>: all archived-era reports go to training, all current-era reports go to test. This directly simulates deployment — the model is trained on past data and evaluated on incidents that arrive after training.</p>
+
+  <figure class="fig">
+    <img src="figures/03_temporal_train_test_split.png" alt="Temporal train/test split">
+    <figcaption>Figure 3 — Temporal split strategy. Archived era → train. Current era → test. A 25% validation hold-out of the training set is used for threshold selection only.</figcaption>
+  </figure>
+
+  <p>A random 80/20 split would let future patterns leak into the training set, artificially inflating AUC. The temporal split gives an honest picture of how the model performs when deployed on new reports.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>5. The First Model Failed — And Why</h2>
+
+  <p>Our first attempt was a single pooled logistic regression trained on all incidents together. The headline numbers looked okay. Then we broke it down by automation level.</p>
+
+  <figure class="fig">
+    <img src="figures/05_baseline_metrics_majority_vs_lr.png" alt="Baseline metrics">
+    <figcaption>Figure 4 — Pooled baseline model results. The aggregate metrics hide a catastrophic failure on ADS.</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figures/06_confusion_matrices.png" alt="Confusion matrices for pooled model">
+    <figcaption>Figure 5 — Confusion matrices for the pooled logistic regression. The ADS slice (right) shows the model predicted zero severe crashes — every single severe ADS crash was missed.</figcaption>
+  </figure>
+
+  <div class="callout">
+    <strong>What happened:</strong> The pooled model learned that ADS → not severe during training (26% severe rate). On the test set the ADS severe rate was 47%. The model's learned shortcut became a liability. It predicted <strong>0 severe crashes for ADS</strong> — a 100% false-negative rate, 283 missed severe crashes.
+  </div>
+
+  <table>
+    <thead><tr><th>Model</th><th>Precision</th><th>Recall</th><th>AUC</th><th>ADS FN</th><th>ADS FN-rate</th></tr></thead>
+    <tbody>
+      <tr><td>Majority-class baseline</td><td>0.757</td><td>1.000</td><td>—</td><td>0</td><td>0%</td></tr>
+      <tr class="highlight"><td>Pooled LR (ADS slice)</td><td>—</td><td><strong>0.0%</strong></td><td>0.510</td><td><strong>283</strong></td><td><strong>100%</strong></td></tr>
+      <tr><td>Pooled LR (L2 slice)</td><td>0.977</td><td>100%</td><td>0.927</td><td>0</td><td>0%</td></tr>
+    </tbody>
+  </table>
+
+  <p>The majority-class baseline (always predict severe) technically gets 0 false negatives — but it also flags every non-severe crash as severe, generating 336 false alarms. It provides no discrimination at all. Any useful model must do better on precision.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>6. The Fix — Stratified Models + Narrative Features</h2>
+
+  <h3>Why separate models?</h3>
+  <p>ADS and L2 are fundamentally different problems. L2 is 98% severe — the outcome is nearly determined by the automation level alone. ADS has a 26% severe rate in training that shifted to 47% in test. Mixing them lets the model learn a dangerous shortcut. The fix: train completely separate models per automation level using the temporal split within each group.</p>
+
+  <h3>Why narrative features?</h3>
+  <p>Tabular features — roadway type, weather, speed, pre-crash movement — give an AUC of 0.50 for ADS. That is random. The structured fields don't differ enough between severe and non-severe ADS crashes because most of them look the same on paper: street, stopped AV, passenger car. What does differ is the crash narrative — the free-text field describing what actually happened.</p>
+
+  <p>We extracted 21 binary scenario flags from the narrative text. Examples: Was the AV stopped? Was another vehicle approaching from behind? Was the crash at an intersection? Did the narrative use minor-damage language? Narrative features alone push AUC to 0.61. Combined with a tree model, they reach 0.92.</p>
+
+  <div class="callout-blue">
+    <strong>No outcome words were used as features.</strong> Words like "injured," "towed," or "airbag deployed" appear in narratives but are direct components of the label. Using them would be data leakage — the model would be reading the answer.
+  </div>
+
+  <h3>Three algorithms</h3>
+  <ul>
+    <li><strong>Logistic Regression</strong> — linear boundary. Works for L2 (near-linearly separable). Fails for ADS (non-linear interactions between narrative flags).</li>
+    <li><strong>Random Forest</strong> — ensemble of decision trees. Captures arbitrary feature combinations. Works well for ADS.</li>
+    <li><strong>XGBoost</strong> — gradient-boosted trees. Best overall for ADS. AUC 0.921.</li>
+  </ul>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>7. Results</h2>
+
+  <figure class="fig">
+    <img src="figures/13_model_comparison_all.png" alt="All 6 model comparisons">
+    <figcaption>Figure 6 — All six model / level combinations. LR fails on ADS (AUC 0.53). XGBoost on ADS reaches AUC 0.921, Precision 0.831, Recall 0.922. L2 is solved by all three algorithms.</figcaption>
+  </figure>
+
+  <table>
+    <thead><tr><th>Model</th><th>Precision</th><th>Recall</th><th>F1</th><th>AUC</th><th>FN</th><th>FN-rate</th></tr></thead>
+    <tbody>
+      <tr><td>LR — ADS</td><td>0.499</td><td>0.845</td><td>0.627</td><td>0.531</td><td>44</td><td>15.5%</td></tr>
+      <tr><td>RF — ADS</td><td>0.804</td><td>0.883</td><td>0.842</td><td>0.893</td><td>33</td><td>11.7%</td></tr>
+      <tr class="highlight"><td>XGB — ADS ★</td><td>0.831</td><td>0.922</td><td>0.874</td><td>0.921</td><td>22</td><td>7.8%</td></tr>
+      <tr class="highlight"><td>LR — L2 ★</td><td>0.985</td><td>0.967</td><td>0.976</td><td>0.876</td><td>25</td><td>3.3%</td></tr>
+      <tr><td>RF — L2</td><td>0.972</td><td>1.000</td><td>0.986</td><td>0.836</td><td>0</td><td>0.0%</td></tr>
+      <tr><td>XGB — L2</td><td>0.972</td><td>1.000</td><td>0.986</td><td>0.850</td><td>0</td><td>0.0%</td></tr>
+    </tbody>
+  </table>
+
+  <figure class="fig">
+    <img src="figures/14_stratified_confusion_matrices_ads_l2.png" alt="Stratified confusion matrices">
+    <figcaption>Figure 7 — Confusion matrices for the best stratified models. XGB on ADS: 261 correct severe, 22 missed. LR on L2: 741 correct severe, 25 missed.</figcaption>
+  </figure>
+
+  <figure class="fig">
+    <img src="figures/15_ads_pooled_vs_stratified_improvement.png" alt="Pooled vs stratified improvement">
+    <figcaption>Figure 8 — Before vs. after. Pooled LR missed all 283 severe ADS crashes. Stratified XGBoost misses 22 — a 92% reduction in false negatives.</figcaption>
+  </figure>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num gold">0.921</div><div class="label">XGB ADS — AUC</div></div>
+    <div class="stat-card"><div class="num gold">0.831</div><div class="label">XGB ADS — Precision</div></div>
+    <div class="stat-card"><div class="num gold">0.922</div><div class="label">XGB ADS — Recall</div></div>
+    <div class="stat-card"><div class="num gold">7.8%</div><div class="label">XGB ADS — FN Rate</div></div>
+  </div>
+
+  <h3>Why LR fails on ADS but works on L2</h3>
+  <p>Logistic regression fits a single linear decision boundary. Predicting ADS severity requires combining narrative flags in non-linear ways — <em>nav_av_stopped</em> + <em>nav_rear_approach</em> together mean something very different from either alone. LR cannot represent this. Even with threshold tuning, LR on ADS gets AUC 0.531 — barely above random. XGBoost's decision trees learn these exact combinations.</p>
+  <p>For L2, the outcome is so dominated by one class (97–98% severe) that a linear boundary is entirely sufficient. Logistic regression gets AUC 0.876 with 98.5% precision.</p>
+
+  <h3>Top features for XGBoost on ADS</h3>
+  <figure class="fig">
+    <img src="figures/09_top_odds_ratios_lr.png" alt="Top features">
+    <figcaption>Figure 9 — Feature importances. Report Month is the single strongest predictor — ADS severe rates vary seasonally. Crashes involving cyclists, motorcycles, and the narrative flag nav_av_moving are the next strongest signals.</figcaption>
+  </figure>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>8. False Negative Analysis — Who Did We Miss?</h2>
+
+  <p>We profiled every severe crash the best models missed to understand the remaining blind spots.</p>
+
+  <figure class="fig">
+    <img src="figures/17_fn_analysis_stratified.png" alt="False negative analysis">
+    <figcaption>Figure 10 — Profile of missed severe crashes. XGB-ADS (top): mostly stopped AV on a street, struck by SUV. LR-L2 (bottom): mostly highway crashes, both vehicles proceeding straight.</figcaption>
+  </figure>
+
+  <table>
+    <thead><tr><th>Model</th><th>Total severe test</th><th>Missed (FN)</th><th>FN Rate</th><th>Top context</th></tr></thead>
+    <tbody>
+      <tr><td>XGB [ADS]</td><td>283</td><td>19</td><td>6.7%</td><td>Street, stopped AV, SUV crash partner</td></tr>
+      <tr><td>LR [L2]</td><td>766</td><td>19</td><td>2.5%</td><td>Highway, both vehicles straight</td></tr>
+    </tbody>
+  </table>
+
+  <h3>ADS — 19 missed</h3>
+  <p>84% happened on a street. 63% had the AV stopped. The most common crash partner was an SUV. These are rear-end scenarios where the AV was passive — no narrative signal of unusual severity. The model undershoots the probability because the narrative looks like a minor incident even when the SUV's mass causes enough damage to trigger a tow.</p>
+
+  <h3>L2 — 19 missed</h3>
+  <p>74% happened on a highway, with both vehicles proceeding straight. These high-speed rear-end scenarios produce lower model confidence because they are underrepresented in the training distribution relative to intersection crashes.</p>
+
+  <div class="callout">
+    <strong>Mitigation:</strong> Add a hard rule — any report where <em>towed_flag = 1</em> goes to the priority review queue regardless of model score. This catches the subset of false negatives where the tow outcome is directly observable in the structured data before narrative processing.
+  </div>
+
+  <p>Compared to the pooled baseline (304 total false negatives), the stratified pipeline reduces missed severe crashes by <strong>94%</strong> — from 304 to 38.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>9. Crash Scenario Clusters</h2>
+
+  <p>We ran K-means clustering on all 2,116 ADS incidents using the same narrative + tabular feature space. The goal: discover natural crash scenario groups that safety engineers can act on without reading individual narratives.</p>
+
+  <figure class="fig">
+    <img src="figures/18_cluster_profiles.png" alt="Cluster profiles">
+    <figcaption>Figure 11 — K-means clustering results (k=7, selected by silhouette score). Top left: silhouette scores by k. Top center: cluster sizes. Top right: severe rate per cluster. Bottom: roadway type distribution and scenario labels.</figcaption>
+  </figure>
+
+  <table>
+    <thead><tr><th>Cluster</th><th>% of ADS</th><th>Severe Rate</th><th>Scenario</th></tr></thead>
+    <tbody>
+      <tr class="highlight"><td>C5</td><td>21.1%</td><td>47.8%</td><td>AV moving at impact — struck by other vehicle</td></tr>
+      <tr><td>C1</td><td>3.9%</td><td>41.5%</td><td>AV hit fixed object (parking lot / disengagement)</td></tr>
+      <tr><td>C0</td><td>14.3%</td><td>32.7%</td><td>Other vehicle struck stationary AV</td></tr>
+      <tr><td>C3</td><td>3.6%</td><td>31.2%</td><td>AV struck other party (AV-at-fault)</td></tr>
+      <tr><td>C2</td><td>56.0%</td><td>26.0%</td><td>Typical street crash — modal baseline</td></tr>
+      <tr><td>C4</td><td>1.0%</td><td>0.0%</td><td>Animal strike — no injuries</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What makes each cluster actionable</h3>
+  <ul>
+    <li><strong>C5 (21%, 48% severe) — highest priority:</strong> AV was in motion when struck. Higher kinetic energy explains the elevated severe rate. Route to senior review within 48 hours.</li>
+    <li><strong>C1 (4%, 42% severe) — parking lot / disengagement:</strong> 95% fixed-object collisions, often co-occurring with AV disengagement events. Cross-reference with disengagement logs.</li>
+    <li><strong>C3 (4%, 31% severe) — AV-at-fault:</strong> The ADS vehicle struck another party. These are potential control-system failures. Escalate for engineering review regardless of severity score.</li>
+    <li><strong>C4 (1%, 0% severe) — animal strikes:</strong> Zero severe outcomes across all 22 incidents. Deprioritize for safety review; route to perception-system team instead.</li>
+  </ul>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>10. Recommendations</h2>
+
+  <p>The two best models form a two-stage triage system:</p>
+
+  <div class="callout-blue">
+    <strong>Incoming report → check automation level → ADS: XGBoost (threshold 0.46) | L2: LR or RF (threshold 0.20)</strong><br>
+    Hard override: towed_flag = 1 → Priority Queue regardless of model score.
+  </div>
+
+  <ul>
+    <li><strong>Route C5 and C1 ADS incidents to 48-hour senior review.</strong> These two clusters are 25% of ADS volume but carry the highest severe rates.</li>
+    <li><strong>Escalate all C3 (AV-at-fault) incidents for engineering audit</strong> — cross-reference ADS sensor and planning logs.</li>
+    <li><strong>Switch L2 model to RF or XGB for zero-FN policy.</strong> Eliminates 19 missed highway crashes at the cost of 22 extra alarms — acceptable trade-off given the injury risk of high-speed L2 failures.</li>
+    <li><strong>Set a retraining trigger at 55% rolling ADS severe rate.</strong> The +21 pp shift from training to test means the model may degrade further as the distribution continues to evolve.</li>
+    <li><strong>Attach cluster labels (C0–C6) as metadata on every ADS report</strong> so reviewers have instant scenario context without reading the narrative.</li>
+  </ul>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>11. Limitations</h2>
+
+  <ul>
+    <li><strong>Reporting bias:</strong> ADS operators report every crash by regulation. L2 reporting thresholds differ. The 98% L2 severe rate is partly a regulatory artifact — the true fleet severe rate is likely lower.</li>
+    <li><strong>ADS distribution shift may be a reporting artifact.</strong> The +21 pp increase in ADS severe rate could reflect changed reporting practices, not a genuine worsening of crash outcomes.</li>
+    <li><strong>Small training positive class for ADS.</strong> Only ~395 severe ADS crashes in training. More data from additional operators would improve model stability.</li>
+    <li><strong>Narrative coverage is 84%.</strong> Redacted (CBI) narratives contribute zero signal for all 21 narrative flags.</li>
+    <li><strong>Models are triage tools for reported incidents only.</strong> They do not generalize to unreported crashes, new automation levels, or non-SGO fleets.</li>
+  </ul>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<section>
+  <h2>Summary</h2>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">283</div><div class="label">Severe ADS crashes missed by pooled LR</div></div>
+    <div class="stat-card"><div class="num gold">22</div><div class="label">Missed by stratified XGBoost</div></div>
+    <div class="stat-card"><div class="num gold">94%</div><div class="label">Reduction in false negatives</div></div>
+    <div class="stat-card"><div class="num gold">0.921</div><div class="label">XGB ADS — AUC</div></div>
+  </div>
+
+  <p>A single pooled model trained on all data failed completely on ADS — 100% false-negative rate, 283 missed severe crashes. The root cause was a distribution shift that the model had no way to handle because it learned automation level as a severity proxy.</p>
+
+  <p>Stratified models — one per automation level, trained with a temporal split, using narrative features extracted from incident text — reduced total false negatives by 94%. XGBoost on ADS reaches AUC 0.921, precision 0.831, and recall 0.922. The cluster analysis surfaces seven distinct crash scenarios, each with a different severity profile and a different operational response.</p>
+
+  <p>The pipeline is ready to integrate into an SGO report triage workflow. The two additions that would most improve it further are more ADS training data and refined narrative extraction for CBI-redacted incidents.</p>
+</section>
+
+</div><!-- /container -->
+
+<footer>ISYE 4600 &nbsp;·&nbsp; Spring 2026 &nbsp;·&nbsp; Georgia Institute of Technology</footer>
+
+</body>
+</html>

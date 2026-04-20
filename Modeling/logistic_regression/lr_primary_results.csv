@@ -1,0 +1,3 @@
+model,automation_level,feature_set,threshold,precision,recall,f1,roc_auc,TP,FP,FN,TN,fn_rate,train_n,test_n,split_type,note
+"ADS — LR (narrative flags, tuned threshold)",ADS,narrative_flags,0.48,0.5372340425531915,0.7137809187279152,0.6130500758725341,0.6079145191420404,202,174,81,140,0.2862190812720848,1519,597,temporal,Trained on ADS-only archived data; tested on ADS-only current data
+L2 — LR (tabular features),L2,tabular,0.5,0.988148148148148,0.8707571801566579,0.9257460097154754,0.8052753382387847,667,8,99,14,0.129242819843342,2663,788,temporal,Trained on L2-only archived data; tested on L2-only current data
