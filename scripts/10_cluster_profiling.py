@@ -179,7 +179,7 @@ def label_cluster(profile: dict, df_cluster: pd.DataFrame) -> str:
 
 def make_cluster_figure(df_ads: pd.DataFrame, profiles: list[dict], k: int,
                         sil_scores: list) -> None:
-    fig_dir = bc.PROJECT_ROOT / "Presentation" / "figures"
+    fig_dir = bc.CLUSTERING_DIR
     fig_dir.mkdir(parents=True, exist_ok=True)
 
     fig = plt.figure(figsize=(16, 10))
@@ -240,7 +240,7 @@ def make_cluster_figure(df_ads: pd.DataFrame, profiles: list[dict], k: int,
     ax_tbl.set_title("Cluster scenario labels", fontweight="semibold", pad=12)
 
     fig.suptitle(f"ADS crash scenario clusters (k={k})", fontsize=14, fontweight="bold")
-    out = fig_dir / "18_cluster_profiles.png"
+    out = fig_dir / "kmeans_cluster_profiles_figure.png"
     fig.savefig(out, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"\n   Figure: {out}")
@@ -303,13 +303,15 @@ def main() -> None:
             key = f"top_{col.replace(' ', '_')}"
             print(f"    {col:<30} {p.get(key, 'N/A')}")
 
-    out_csv = bc.LR_DIR / "ads_cluster_assignments.csv"
+    bc.CLUSTERING_DIR.mkdir(parents=True, exist_ok=True)
+
+    out_csv = bc.CLUSTERING_DIR / "ads_cluster_assignments.csv"
     save_cols = ["cluster"] + [c for c in ads_df.columns if c != "cluster"]
     ads_df[save_cols].to_csv(out_csv, index=False)
     print(f"\n   Saved cluster assignments: {out_csv}")
 
     summary_df = pd.DataFrame(profiles)
-    summary_csv = bc.LR_DIR / "ads_cluster_summary.csv"
+    summary_csv = bc.CLUSTERING_DIR / "ads_cluster_summary.csv"
     summary_df.to_csv(summary_csv, index=False)
     print(f"   Saved cluster summary    : {summary_csv}")
 
